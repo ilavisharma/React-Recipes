@@ -35,6 +35,7 @@ app.use(
 // Connect schemas with GraphQL
 app.use(
   '/graphql',
+  bodyParser.json(),
   graphqlExpress({
     schema,
     context: {
