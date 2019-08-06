@@ -41,7 +41,9 @@ app.use(async (req, res, next) => {
       const currentUser = await jwt.verify(token, process.env.SECRET);
       req.currentUser = currentUser;
     } catch (e) {
-      console.error(e);
+      if (e.name === 'TokenExpiredError')
+        console.log(e.message + ' at: ' + Date(e.expiredAt));
+      else console.error(e);
     }
   }
   next();
