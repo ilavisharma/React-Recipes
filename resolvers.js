@@ -23,6 +23,10 @@ exports.resolvers = {
         model: 'Recipe'
       });
       return user;
+    },
+    getRecipe: async (root, { _id }, { Recipe }) => {
+      const recipe = Recipe.findOne({ _id });
+      return recipe;
     }
   },
   Mutation: {
