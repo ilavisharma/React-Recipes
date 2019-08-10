@@ -43,7 +43,7 @@ app.use(async (req, res, next) => {
     } catch (e) {
       if (e.name === 'TokenExpiredError')
         console.log(e.message + ' at: ' + Date(e.expiredAt));
-      else console.error(e);
+      else console.log('Error', e.message);
     }
   }
   next();
