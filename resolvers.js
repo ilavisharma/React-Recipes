@@ -9,7 +9,8 @@ const createToken = (user, secret, expiresIn) => {
 exports.resolvers = {
   Query: {
     getAllRecipes: async (root, args, { Recipe }) => {
-      const allRecipes = await Recipe.find();
+      // also sort the recipes according to the createdDate
+      const allRecipes = await Recipe.find().sort({ createdDate: 'desc' });
       return allRecipes;
     },
     getCurrentUser: async (root, args, { currentUser, User }) => {
