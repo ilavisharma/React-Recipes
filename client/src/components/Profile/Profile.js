@@ -1,6 +1,8 @@
 import React from 'react';
 import UserInfo from './UserInfo';
 import UserRecipes from './UserRecipes';
+// This is a protected route so we will use withAuth
+import withAuth from '../withAuth';
 
 const Profile = ({ session }) => (
   <div className="App">
@@ -9,4 +11,4 @@ const Profile = ({ session }) => (
   </div>
 );
 
-export default Profile;
+export default withAuth(session => session && session.getCurrentUser)(Profile);
