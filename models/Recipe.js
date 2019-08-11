@@ -30,4 +30,11 @@ const RecipeSchema = new Schema({
   }
 });
 
+// Optimize our search
+// and specify which fields we are searching on
+RecipeSchema.index({
+  '$**': 'text'
+  // we are searching for any field on this model
+});
+
 module.exports = model('Recipe', RecipeSchema);
