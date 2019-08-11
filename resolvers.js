@@ -58,8 +58,10 @@ exports.resolvers = {
         return recipes;
       }
     },
-    getUserRecipes: async (root, {username}, {Recipe}) => {
-      const userRecipes= await Recipe.find({username}).sort({createdDate: 'desc'})
+    getUserRecipes: async (root, { username }, { Recipe }) => {
+      const userRecipes = await Recipe.find({ username }).sort({
+        createdDate: 'desc'
+      });
       return userRecipes;
     }
   },
@@ -100,6 +102,10 @@ exports.resolvers = {
         throw new Error('Invalid Password');
       }
       return { token: createToken(user, process.env.SECRET, '1h') };
+    },
+    deleteUserRecipe: async (root, { _id }, { Recipe }) => {
+      const recipe = await Recipe.findOneAndDelete({ _id });
+      return recipe;
     }
   }
 };
