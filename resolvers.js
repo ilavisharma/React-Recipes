@@ -118,6 +118,17 @@ exports.resolvers = {
         { $addToSet: { favorites: _id } }
       );
       return recipe;
+    },
+    unlikeRecipe: (root, { _id, username }, { Recipe, User }) => {
+      const recipe = await Recipe.findOneAndUpdate(
+        { _id },
+        { $inc: { likes: -1 } }
+      );
+      await User.findOneAndUpdate(
+        { username },
+        { $pull: { favorites: _id } }
+      );
+      return recipe;
     }
   }
 };
