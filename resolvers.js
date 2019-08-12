@@ -119,15 +119,12 @@ exports.resolvers = {
       );
       return recipe;
     },
-    unlikeRecipe: (root, { _id, username }, { Recipe, User }) => {
+    unlikeRecipe: async (root, { _id, username }, { Recipe, User }) => {
       const recipe = await Recipe.findOneAndUpdate(
         { _id },
         { $inc: { likes: -1 } }
       );
-      await User.findOneAndUpdate(
-        { username },
-        { $pull: { favorites: _id } }
-      );
+      await User.findOneAndUpdate({ username }, { $pull: { favorites: _id } });
       return recipe;
     }
   }
