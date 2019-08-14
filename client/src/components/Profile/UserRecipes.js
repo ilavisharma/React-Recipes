@@ -14,7 +14,7 @@ const handleDelete = deleteUserRecipe => {
   );
   if (confirmDelete) {
     deleteUserRecipe().then(({ data }) => {
-      console.log(data);
+      // console.log(data);
     });
   }
 };
