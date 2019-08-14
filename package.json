@@ -11,7 +11,7 @@
     "server": "nodemon server.js",
     "client": "cd client && yarn start",
     "dev": "concurrently --names \"server,client\" \"yarn run server --silent\" \"yarn run client --silent\"",
-    "heroku-postbuild": "yarn install --prefix client && yarn run build --prefix client"
+    "build": "cd client && yarn && yarn build"
   },
   "author": "",
   "license": "ISC",
