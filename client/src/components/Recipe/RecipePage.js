@@ -11,14 +11,48 @@ const RecipePage = ({ match }) => {
       {({ data, loading, error }) => {
         if (loading) return <div className="">Loading</div>;
         if (error) return <div className="">Error</div>;
+        const {
+          imageUrl,
+          name,
+          category,
+          description,
+          instructions,
+          likes,
+          username
+        } = data.getRecipe;
         return (
           <div className="App">
-            <h2>{data.getRecipe.name}</h2>
-            <p>Category: {data.getRecipe.category}</p>
-            <p>Instructions: {data.getRecipe.instructions}</p>
-            <p>Likes: {data.getRecipe.likes}</p>
-            <p>Created By: {data.getRecipe.username}</p>
-            <LikeRecipe _id={_id} />
+            <div
+              className="recipe-image"
+              style={{
+                background: `url(${imageUrl}) center center / cover no-repeat`
+              }}
+            />
+            <div className="recipe">
+              <div className="recipe-header">
+                <h2 className="recipe-name">
+                  <strong>{name}</strong>
+                </h2>
+                <h5>
+                  <strong>{category}</strong>
+                </h5>
+                <p>
+                  Created by <strong>{username}</strong>
+                </p>
+                <p>
+                  {likes}{' '}
+                  <span role="img" arial-label="heart">
+                    ♥
+                  </span>
+                </p>
+              </div>
+              <blockquote className="recipe-description">
+                {description}
+              </blockquote>
+              <h3 className="recipe-instructions__title">Instructions</h3>
+              <div className="recipe-instructions">{instructions}</div>
+              <LikeRecipe _id={_id} />
+            </div>
           </div>
         );
       }}
