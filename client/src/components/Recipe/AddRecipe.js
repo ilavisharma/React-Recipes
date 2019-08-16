@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
+import CKEditor from 'react-ckeditor-component';
 import { ADD_RECIPE, GET_ALL_RECIPES, GET_USER_RECIPES } from '../../queries';
 import Error from '../Error';
 import withAuth from '../withAuth';
@@ -32,9 +33,15 @@ class Addrecipe extends Component {
     this.setState({ [name]: value });
   };
 
+  handleEditorChange = event => {
+    const newContent = event.editor.getData();
+    this.setState({ instructions: newContent });
+  };
+
   validateForm = () => {
     const { name, imageUrl, category, description, instructions } = this.state;
-    const isInvalid = !name || !imageUrl || !category || !description || !instructions;
+    const isInvalid =
+      !name || !imageUrl || !category || !description || !instructions;
     return isInvalid;
   };
 
@@ -59,12 +66,26 @@ class Addrecipe extends Component {
   };
 
   render() {
-    const { name, imageUrl, category, description, instructions, username } = this.state;
+    const {
+      name,
+      imageUrl,
+      category,
+      description,
+      instructions,
+      username
+    } = this.state;
 
     return (
       <Mutation
         mutation={ADD_RECIPE}
-        variables={{ name, imageUrl, category, description, instructions, username }}
+        variables={{
+          name,
+          imageUrl,
+          category,
+          description,
+          instructions,
+          username
+        }}
         update={this.updateCache}
         refetchQueries={() => [
           { query: GET_USER_RECIPES, variables: { username } }
@@ -109,11 +130,13 @@ class Addrecipe extends Component {
                   placeholder="Add Description"
                   value={description}
                 />
-                <textarea
+                <label htmlFor="instructions">Add Instructions</label>
+                <CKEditor
                   name="instructions"
-                  onChange={this.handleChange}
-                  placeholder="Add Instructions"
-                  value={instructions}
+                  content={instructions}
+                  events={{
+                    change: this.handleEditorChange
+                  }}
                 />
                 <button
                   disabled={loading || this.validateForm()}
