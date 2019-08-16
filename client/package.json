@@ -9,8 +9,10 @@
     "react-apollo": "^2.5.8",
     "react-ckeditor-component": "^1.1.0",
     "react-dom": "^16.8.6",
+    "react-pose": "^4.0.8",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "react-spinners": "^0.5.12"
   },
   "scripts": {
     "start": "react-app-rewired start",
