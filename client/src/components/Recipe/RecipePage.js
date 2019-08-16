@@ -40,7 +40,7 @@ const RecipePage = ({ match }) => {
                   Created by <strong>{username}</strong>
                 </p>
                 <p>
-                  {likes}{' '}
+                  {likes}
                   <span role="img" arial-label="heart">
                     ♥
                   </span>
