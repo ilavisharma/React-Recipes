@@ -22,6 +22,7 @@ class Search extends Component {
           <div className="App">
             <input
               type="text"
+              className="search"
               placeholder="Search for Recipes"
               onChange={async event => {
                 event.persist();
