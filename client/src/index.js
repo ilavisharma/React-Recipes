@@ -10,6 +10,7 @@ import './index.css';
 import App from './components/App';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
+import { hot } from 'react-hot-loader/root';
 import Signin from './components/Auth/Signin';
 import Signup from './components/Auth/Signup';
 import withSession from './components/withSession';
@@ -20,7 +21,7 @@ import Profile from './components/Profile/Profile';
 import RecipePage from './components/Recipe/RecipePage';
 
 const client = new ApolloClient({
-  uri: 'https://react-recipes-graphql.herokuapp.com/graphql',
+  uri: 'http://localhost:4444/graphql',
   fetchOptions: {
     credentials: 'include'
   },
@@ -66,9 +67,14 @@ const Root = ({ refetch, session }) => (
 
 const RootWithSession = withSession(Root);
 
+const RootHot =
+  process.env.NODE_ENV === 'development'
+    ? hot(RootWithSession)
+    : RootWithSession;
+
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <RootWithSession />
+    <RootHot />
   </ApolloProvider>,
   document.getElementById('root')
 );
