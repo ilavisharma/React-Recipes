@@ -4,12 +4,12 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config({ path: 'variables.env' });
 const jwt = require('jsonwebtoken');
-const path= require('path');
+const path = require('path');
 const Recipe = require('./models/Recipe');
 const User = require('./models/User');
 
 // Bring in GraphQL-Express middleware
-const { graphiqlExpress, graphqlExpress } = require('apollo-server-express');
+const { graphqlExpress } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools');
 
 const { typeDefs } = require('./schema');
@@ -50,14 +50,6 @@ app.use(async (req, res, next) => {
   next();
 });
 
-// Create graphiql application
-// app.use(
-//   '/graphiql',
-//   graphiqlExpress({
-//     endpointURL: '/graphql'
-//   })
-// );
-
 // Connect schemas with GraphQL
 app.use(
   '/graphql',
@@ -76,8 +68,8 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-  })
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
 }
 
 const port = process.env.PORT || 4444;
