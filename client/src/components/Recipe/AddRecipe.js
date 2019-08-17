@@ -99,20 +99,23 @@ class Addrecipe extends Component {
                 className="form"
                 onSubmit={e => this.handleSubmit(e, addRecipe)}
               >
+                <label htmlFor="name">Recipe Name</label>
                 <input
                   type="text"
                   name="name"
                   onChange={this.handleChange}
-                  placeholder="Recipe Name"
+                  placeholder="Add Name"
                   value={name}
                 />
+                <label htmlFor="imageUrl">Recipe Image</label>
                 <input
                   type="text"
                   name="imageUrl"
                   onChange={this.handleChange}
-                  placeholder="Recipe Image"
+                  placeholder="Add Image Url"
                   value={imageUrl}
                 />
+                <label htmlFor="category">Category of Recipe</label>
                 <select
                   name="category"
                   onChange={this.handleChange}
@@ -123,6 +126,7 @@ class Addrecipe extends Component {
                   <option value="Dinner">Dinner</option>
                   <option value="Snack">Snack</option>
                 </select>
+                <label htmlFor="description">Recipe Description</label>
                 <input
                   type="text"
                   name="description"
