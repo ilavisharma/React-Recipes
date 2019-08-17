@@ -10,7 +10,7 @@ import './index.css';
 import App from './components/App';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
-import { hot } from 'react-hot-loader/root';
+// import { hot } from 'react-hot-loader/root';
 import Signin from './components/Auth/Signin';
 import Signup from './components/Auth/Signup';
 import withSession from './components/withSession';
@@ -67,14 +67,14 @@ const Root = ({ refetch, session }) => (
 
 const RootWithSession = withSession(Root);
 
-const RootHot =
-  process.env.NODE_ENV === 'development'
-    ? hot(RootWithSession)
-    : RootWithSession;
+// const RootHot =
+//   process.env.NODE_ENV === 'development'
+//     ? hot(RootWithSession)
+//     : RootWithSession;
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <RootHot />
+    <RootWithSession />
   </ApolloProvider>,
   document.getElementById('root')
 );
